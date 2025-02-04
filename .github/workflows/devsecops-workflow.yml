@@ -38,13 +38,13 @@ jobs:
       - name: Build and Tag Docker Image
         run: |
           cd docker-nginx
-          docker build -t reetika1999/github-service:latest -f ./stable/alpine/Dockerfile .
-          echo "Docker image built and tagged as reetika1999/github-service:latest."
+          docker build -t lavakush07/easy-buggy-app:GHA -f ./stable/alpine/Dockerfile .
+          echo "Docker image built and tagged as lavakush07/easy-buggy-app:GHA."
 
       # Step 5: Push the Docker Image to Docker Hub
       - name: Push Docker Image
         run: |
-          docker push reetika1999/github-service:latest
+          docker push lavakush07/easy-buggy-app:GHA
           echo "Docker image pushed to Docker Hub."
 
       # Step 6: Log in to Vault
@@ -67,14 +67,14 @@ jobs:
       - name: Run SLSA Provenance Action
         uses: ./slsa-generation
         with:
-          TARGET: 'reetika1999/github-service:latest'
+          TARGET: 'lavakush07/easy-buggy-app:GHA'
           ATTEST: true
           KMS_KEY: 'cosign'
           
       - name: Run SLSA Verification Action
         uses: ./slsa-verification
         with:
-          TARGET: 'reetika1999/github-service:latest'
+          TARGET: 'lavakush07/easy-buggy-app:GHA'
           VERIFY: true
           KMS_KEY: 'cosign'
 
@@ -84,7 +84,7 @@ jobs:
         with:
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
-          TARGET: 'reetika1999/github-service:latest'
+          TARGET: 'lavakush07/easy-buggy-app:GHA'
           ATTEST: true
           KMS_KEY: 'cosign'
 
@@ -92,7 +92,7 @@ jobs:
       - name: Run SBOM Policy Enforcement Action
         uses: ./sbom-policy-enforcement
         with:
-          TARGET: 'reetika1999/github-service:latest'
+          TARGET: 'lavakush07/easy-buggy-app:GHA'
           VERIFY: true
           KMS_KEY: 'cosign'
           POLICY_SET_REF: 'github_opa_policy'
