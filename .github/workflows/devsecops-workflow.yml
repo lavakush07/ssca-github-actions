@@ -13,7 +13,7 @@ jobs:
       HARNESS_ORG_ID: 'default'
       HARNESS_PROJECT_ID: 'Product_Exploratory'
       HARNESS_API_KEY: ${{ secrets.SSCA_QA_API_KEY }}
-      VAULT_ADDR: ${{ secrets.VAULT_URL }}
+      # VAULT_ADDR: ${{ secrets.VAULT_URL }}
       DOCKER_CONFIG: $HOME/.docker
 
     steps:
