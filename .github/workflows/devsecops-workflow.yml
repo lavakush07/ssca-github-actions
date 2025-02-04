@@ -10,8 +10,8 @@ jobs:
     env:
       HARNESS_ACCOUNT_URL: 'https://qa.harness.io'
       HARNESS_ACCOUNT_ID: 'ppbLW9YpRharzPs_JtWT7g'
-      HARNESS_ORG_ID: 'SSCA'
-      HARNESS_PROJECT_ID: 'SSCA_Sanity_Automation'
+      HARNESS_ORG_ID: 'default'
+      HARNESS_PROJECT_ID: 'Product_Exploratory'
       HARNESS_API_KEY: ${{ secrets.SSCA_QA_API_KEY }}
       VAULT_ADDR: ${{ secrets.VAULT_URL }}
       DOCKER_CONFIG: $HOME/.docker
