@@ -6,7 +6,7 @@ on:
 
 jobs:
   combined-workflow:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       HARNESS_ACCOUNT_URL: 'https://qa.harness.io'
       HARNESS_ACCOUNT_ID: 'ppbLW9YpRharzPs_JtWT7g'
