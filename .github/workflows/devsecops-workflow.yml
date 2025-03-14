@@ -68,15 +68,15 @@ jobs:
         uses: ./slsa-generation
         with:
           TARGET: 'lavakush07/easy-buggy-app:GHA'
-          ATTEST: true
-          KMS_KEY: 'cosign'
+          # ATTEST: true
+          # KMS_KEY: 'cosign'
           
       - name: Run SLSA Verification Action
         uses: ./slsa-verification
         with:
           TARGET: 'lavakush07/easy-buggy-app:GHA'
-          VERIFY: true
-          KMS_KEY: 'cosign'
+          # VERIFY: true
+          # KMS_KEY: 'cosign'
 
       # Step 9: Run SBOM Orchestration Action
       - name: Run SBOM Orchestration Action
@@ -85,8 +85,8 @@ jobs:
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
           TARGET: 'lavakush07/easy-buggy-app:GHA'
-          ATTEST: true
-          KMS_KEY: 'cosign'
+          # ATTEST: true
+          # KMS_KEY: 'cosign'
 
       # Step 10: Run SBOM Policy Enforcement
       - name: Run SBOM Policy Enforcement Action
@@ -94,5 +94,5 @@ jobs:
         with:
           TARGET: 'lavakush07/easy-buggy-app:GHA'
           VERIFY: true
-          KMS_KEY: 'cosign'
-          POLICY_SET_REF: 'github_opa_policy'
+          # KMS_KEY: 'cosign'
+          # POLICY_SET_REF: 'github_opa_policy'
