@@ -61,12 +61,12 @@ jobs:
           echo "VAULT_TOKEN=${{ steps.vault_login.outputs.token }}" >> $GITHUB_ENV
 
       # Step 8: Run SLSA Provenance Action
-      - name: Run SLSA Provenance Action
-        uses: ./slsa-generation
-        with:
-          TARGET: 'lavakush07/easy-buggy-app:GHAA'
-          ATTEST: false
-          KMS_KEY: 'cosign'
+      # - name: Run SLSA Provenance Action
+      #   uses: ./slsa-generation
+      #   with:
+      #     TARGET: 'lavakush07/easy-buggy-app:GHAA'
+      #     ATTEST: false
+      #     KMS_KEY: 'cosign'
 
       # Step 9: Run SBOM Orchestration Action
       - name: Run SBOM Orchestration Action
