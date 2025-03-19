@@ -77,6 +77,13 @@ jobs:
           TARGET: 'lavakush07/easy-buggy-app:GHAA'
           ATTEST: false
           KMS_KEY: 'cosign'
+    
+      - name: Run SLSA Verification Action
+        uses: ./slsa-verification
+        with:
+          TARGET: 'lavakush07/easy-buggy-app:GHAA'
+          VERIFY: true
+          KMS_KEY: 'cosign'    
 
       # # Step 10: Run SBOM Policy Enforcement
       # - name: Run SBOM Policy Enforcement Action
