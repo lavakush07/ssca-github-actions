@@ -36,8 +36,8 @@ jobs:
       - name: Build and Tag Docker Image
         run: |
           cd easybuggy-vulnerable-application
-          docker build -t lavakush07/easy-buggy-app:GHAA -f ./stable/alpine/Dockerfile .
-          echo "Docker image built and tagged as lavakush07/easy-buggy-app:GHAA."
+          docker build -t lavakush07/easy-buggy-app:GHAA .
+          echo "Docker image built and tagged as lavakush07/easy-buggy-app:GHAA"
 
       # Step 5: Push the Docker Image to Docker Hub
       - name: Push Docker Image
