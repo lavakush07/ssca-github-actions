@@ -78,7 +78,7 @@ jobs:
           ATTEST: false
           KMS_KEY: 'cosign'
 
-      # Step 10: Run SBOM Policy Enforcement Action
+      # # Step 10: Run SBOM Policy Enforcement
       - name: Run SBOM Policy Enforcement Action
         uses: ./sbom-policy-enforcement
         with:
