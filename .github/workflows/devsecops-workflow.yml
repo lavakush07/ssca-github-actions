@@ -60,7 +60,7 @@ jobs:
       #     echo "VAULT_ADDR=${{ secrets.VAULT_URL }}" >> $GITHUB_ENV
       #     echo "VAULT_TOKEN=${{ steps.vault_login.outputs.token }}" >> $GITHUB_ENV
 
-      Step 8: Run SLSA Provenance Action
+      # Step 8: Run SLSA Provenance Action
       - name: Run SLSA Provenance Action
         uses: ./slsa-generation
         with:
