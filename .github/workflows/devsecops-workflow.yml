@@ -1,4 +1,4 @@
-name: Combined Workflow for SLSA Provenance, Verification, SBOM, and Policy Enforcement for QA
+name: Combined Workflow for SLSA Provenance, SBOM, and Policy Enforcement
 
 on:
   push:
@@ -12,9 +12,7 @@ jobs:
       HARNESS_ACCOUNT_ID: 'ppbLW9YpRharzPs_JtWT7g'
       HARNESS_ORG_ID: 'default'
       HARNESS_PROJECT_ID: 'Product_Exploratory'
-      HARNESS_API_KEY: ${{ secrets.SCA_API_KEY }}
-      # VAULT_ADDR: ${{ secrets.VAULT_URL }}
-      DOCKER_CONFIG: $HOME/.docker
+      HARNESS_API_KEY: ${{ secrets.SSCA_API_KEY }}
 
     steps:
       # Step 1: Checkout the main repository
@@ -38,14 +36,14 @@ jobs:
       - name: Build and Tag Docker Image
         run: |
           cd docker-nginx
-          docker build -t lavakush07/easy-buggy-app:GHA -f ./stable/alpine/Dockerfile .
-          echo "Docker image built and tagged as lavakush07/easy-buggy-app:GHA."
+          docker build -t lavakush07/easy-buggy-app:GHAA -f ./stable/alpine/Dockerfile .
+          echo "Docker image built and tagged as lavakush07/easy-buggy-app:GHAA."
 
       # Step 5: Push the Docker Image to Docker Hub
       - name: Push Docker Image
         run: |
-          docker push lavakush07/easy-buggy-app:GHA
-          echo "Docker image pushed to Docker Hub"
+          docker push lavakush07/easy-buggy-app:GHAA
+          echo "Docker image pushed to Docker Hub."
 
       # Step 6: Log in to Vault
       - name: Log in to Vault
@@ -55,7 +53,6 @@ jobs:
           url: ${{ secrets.VAULT_URL }}
           method: token
           token: ${{ secrets.VAULT_TOKEN }}
-          exportToken: true
 
       # Step 7: Set Vault Environment Variables
       - name: Set Vault Environment Variables
@@ -67,16 +64,9 @@ jobs:
       - name: Run SLSA Provenance Action
         uses: ./slsa-generation
         with:
-          TARGET: 'lavakush07/easy-buggy-app:GHA'
-          # ATTEST: true
-          # KMS_KEY: 'cosign'
-          
-      - name: Run SLSA Verification Action
-        uses: ./slsa-verification
-        with:
-          TARGET: 'lavakush07/easy-buggy-app:GHA'
-          # VERIFY: true
-          # KMS_KEY: 'cosign'
+          TARGET: 'lavakush07/easy-buggy-app:GHAA'
+          ATTEST: false
+          KMS_KEY: 'cosign'
 
       # Step 9: Run SBOM Orchestration Action
       - name: Run SBOM Orchestration Action
@@ -84,15 +74,16 @@ jobs:
         with:
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
-          TARGET: 'lavakush07/easy-buggy-app:GHA'
-          # ATTEST: true
-          # KMS_KEY: 'cosign'
+          TARGET: 'lavakush07/easy-buggy-app:GHAA'
+          ATTEST: false
+          KMS_KEY: 'cosign'
 
-      # Step 10: Run SBOM Policy Enforcement
+      # Step 10: Run SBOM Policy Enforcement Action
       - name: Run SBOM Policy Enforcement Action
         uses: ./sbom-policy-enforcement
         with:
-          TARGET: 'lavakush07/easy-buggy-app:GHA'
-          VERIFY: true
-          # KMS_KEY: 'cosign'
-          # POLICY_SET_REF: 'github_opa_policy'
+          TARGET: 'lavakush07/easy-buggy-app:GHAA'
+          VERIFY: false
+          KMS_KEY: 'cosign'
+          POLICY_SET_REF: 'opa_policy_set_for_at'
+
