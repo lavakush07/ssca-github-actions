@@ -45,7 +45,7 @@ jobs:
       - name: Push Docker Image
         run: |
           docker push lavakush07/easy-buggy-app:GHA
-          echo "Docker image pushed to Docker Hub."
+          echo "Docker image pushed to Docker Hub"
 
       # Step 6: Log in to Vault
       - name: Log in to Vault
