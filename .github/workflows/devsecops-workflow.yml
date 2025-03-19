@@ -60,15 +60,24 @@ jobs:
           echo "VAULT_ADDR=${{ secrets.VAULT_URL }}" >> $GITHUB_ENV
           echo "VAULT_TOKEN=${{ steps.vault_login.outputs.token }}" >> $GITHUB_ENV
 
-      # Step 8: Run SLSA Provenance Action
+      # Step 8: Retrieve KMS key (Cosign) from Vault
+      # Step to retrieve the public key (Cosign)
+      - name: Retrieve Cosign Public Key from Vault
+        run: |
+          export COSIGN_KEY=$(vault kv get -field=public_key -mount="secret1/cosign-key" "cosign-key")
+          echo "COSIGN_KEY=$COSIGN_KEY" >> $GITHUB_ENV
+
+
+
+      # Step 9: Run SLSA Provenance Action
       - name: Run SLSA Provenance Action
         uses: ./slsa-generation
         with:
           TARGET: 'lavakush07/easy-buggy-app:GHAA'
           ATTEST: false
-          KMS_KEY: 'cosign'
+          KMS_KEY: ${{ env.COSIGN_KEY }}
 
-      # Step 9: Run SBOM Orchestration Action
+      # Step 10: Run SBOM Orchestration Action
       - name: Run SBOM Orchestration Action
         uses: ./sbom-generation
         with:
@@ -76,14 +85,16 @@ jobs:
           FORMAT: 'spdx-json'
           TARGET: 'lavakush07/easy-buggy-app:GHAA'
           ATTEST: false
-          KMS_KEY: 'cosign'
+          KMS_KEY: ${{ env.COSIGN_KEY }}
     
+      # Step 11: Run SLSA Verification Action
       - name: Run SLSA Verification Action
         uses: ./slsa-verification
         with:
           TARGET: 'lavakush07/easy-buggy-app:GHAA'
           VERIFY: true
-          KMS_KEY: 'cosign'    
+          KMS_KEY: ${{ env.COSIGN_KEY }}
+ 
 
       # # Step 10: Run SBOM Policy Enforcement
       # - name: Run SBOM Policy Enforcement Action
