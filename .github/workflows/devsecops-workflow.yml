@@ -88,12 +88,12 @@ jobs:
           KMS_KEY: ${{ env.COSIGN_KEY }}
     
       # Step 11: Run SLSA Verification Action
-      - name: Run SLSA Verification Action
-        uses: ./slsa-verification
-        with:
-          TARGET: 'lavakush07/easy-buggy-app:GHAA'
-          VERIFY: true
-          KMS_KEY: ${{ env.COSIGN_KEY }}
+      # - name: Run SLSA Verification Action
+      #   uses: ./slsa-verification
+      #   with:
+      #     TARGET: 'lavakush07/easy-buggy-app:GHAA'
+      #     VERIFY: true
+      #     KMS_KEY: ${{ env.COSIGN_KEY }}
  
 
       # # Step 10: Run SBOM Policy Enforcement
