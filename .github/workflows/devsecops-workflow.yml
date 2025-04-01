@@ -87,21 +87,17 @@ jobs:
           ATTEST: false
           KMS_KEY: ${{ env.COSIGN_KEY }}
     
-      # Step 11: Run SLSA Verification Action
-      # - name: Run SLSA Verification Action
-      #   uses: ./slsa-verification
-      #   with:
-      #     TARGET: 'lavakush07/easy-buggy-app:GHAA'
-      #     VERIFY: true
-      #     KMS_KEY: ${{ env.COSIGN_KEY }}
- 
+      -  name: SLSA Verification
+         uses: harness/github-actions/slsa-verification@1.1.0
+         with:
+           HARNESS_ACCOUNT_URL: https://app.harness.io
+           HARNESS_ACCOUNT_ID: vpCkHKsDSxK9_KYfjCTMKA
+           HARNESS_ORG_ID: SSCA
+           HARNESS_PROJECT_ID: Exploratory
+           HARNESS_API_KEY: ${{ secrets.SSCA_API_KEY }}
+           TARGET: lavakush07/easy-buggy-app:GHAA
+           VERIFY: true
+           KMS_KEY: vault_token
 
-      # # Step 10: Run SBOM Policy Enforcement
-      # - name: Run SBOM Policy Enforcement Action
-      #   uses: ./sbom-policy-enforcement
-      #   with:
-      #     TARGET: 'lavakush07/easy-buggy-app:GHAA'
-      #     VERIFY: false
-      #     KMS_KEY: 'cosign'
-      #     POLICY_SET_REF: 'opa_policy_set_for_at'
+
 
