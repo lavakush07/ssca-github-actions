@@ -109,7 +109,7 @@ jobs:
           TARGET: 'lavakush07/easy-buggy-app:GHA'
           VERIFY: true
           KMS_KEY: 'cosign'
-          POLICY_SET_REF: 'policy_for_at'
+          POLICY_SET_REF: 'sbom_policy_enforcement'
     
       # -  name: SLSA Verification
       #    uses: ./slsa-verification
