@@ -101,7 +101,7 @@ jobs:
           FORMAT: 'spdx-json'
           TARGET: 'lavakush07/easy-buggy-app:GHA'
           ATTEST: true
-          KMS_KEY: ${{ env.COSIGN_KEY }}
+          KMS_KEY: 'cosign'
           
       - name: Run SBOM Policy Enforcement Action
         uses: ./sbom-policy-enforcement
