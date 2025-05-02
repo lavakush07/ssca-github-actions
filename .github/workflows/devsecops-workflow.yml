@@ -23,7 +23,7 @@ jobs:
       - name: Clone Additional Repository
         run: |
           git clone https://github.com/lavakush07/easybuggy-vulnerable-application
-          echo "Cloned additionall repository: docker-nginx"
+          echo "Cloned additional repository: docker-nginx"
 
       # Step 3: Log in to Docker Hub
       - name: Log in to Docker Hub
