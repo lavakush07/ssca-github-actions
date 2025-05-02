@@ -99,17 +99,17 @@ jobs:
         with:
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
-          TARGET: 'lavakush07/easy-buggy-app:GHAA'
-          ATTEST: false
+          TARGET: 'lavakush07/easy-buggy-app:GHA'
+          ATTEST: true
           KMS_KEY: ${{ env.COSIGN_KEY }}
           
       - name: Run SBOM Policy Enforcement Action
         uses: ./sbom-policy-enforcement
         with:
-          TARGET: 'kartikey366/nginx-private:github-actions'
+          TARGET: 'lavakush07/easy-buggy-app:GHA'
           VERIFY: true
           KMS_KEY: 'cosign'
-          POLICY_SET_REF: 'opa_policy_set_for_at'
+          POLICY_SET_REF: 'policy_for_at'
     
       # -  name: SLSA Verification
       #    uses: ./slsa-verification
