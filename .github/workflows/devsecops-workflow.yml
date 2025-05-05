@@ -90,7 +90,7 @@ jobs:
         uses: ./slsa-generation
         with:
           TARGET: 'lavakush07/easy-buggy-app:GHAA'
-          ATTEST: false
+          ATTEST: true
           KMS_KEY: 'cosign'
 
       # # Step 10: Run SBOM Orchestration Action
