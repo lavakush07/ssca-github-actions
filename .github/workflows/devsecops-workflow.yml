@@ -74,7 +74,7 @@ jobs:
 
       - name: Verify Vault Login and Print Token
         run: |
-          echo "Vault login successful."
+          echo "Vault login successfull."
           echo "Vault Token: ${{ steps.vault_login.outputs.token }}"
         env:
           VAULT_TOKEN: ${{ steps.vault_login.outputs.token }}  # Ensuring token is accessible
