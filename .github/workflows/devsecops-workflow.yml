@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v3
 
       # Step 2: Clone Additional Repository
-      - name: Clone Additional Repository
+      - name: Clone Additional Repository1
         run: |
           git clone https://github.com/lavakush07/easybuggy-vulnerable-application
           echo "Cloned additional repository: docker-nginx"
@@ -86,12 +86,12 @@ jobs:
           echo "VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}" >> $GITHUB_ENV
 
       # Step 9: Run SLSA Provenance Action
-      # - name: Run SLSA Provenance Action
-      #   uses: ./slsa-generation
-      #   with:
-      #     TARGET: 'lavakush07/easy-buggy-app:GHAA'
-      #     ATTEST: false
-      #     KMS_KEY: ${{ env.COSIGN_KEY }}
+      - name: Run SLSA Provenance Action
+        uses: ./slsa-generation
+        with:
+          TARGET: 'lavakush07/easy-buggy-app:GHAA'
+          ATTEST: false
+          KMS_KEY: 'cosign'
 
       # # Step 10: Run SBOM Orchestration Action
       # - name: Run SBOM Orchestration Action
