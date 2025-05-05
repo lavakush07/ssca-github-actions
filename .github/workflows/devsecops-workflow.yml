@@ -85,31 +85,31 @@ jobs:
           echo "VAULT_ADDR=${{ secrets.VAULT_URL }}" >> $GITHUB_ENV
           echo "VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}" >> $GITHUB_ENV
 
-      # Step 9: Run SLSA Provenance Action
-      # - name: Run SLSA Provenance Action
-      #   uses: ./slsa-generation
-      #   with:
-      #     TARGET: 'lavakush07/easy-buggy-app:GHAA'
-      #     ATTEST: false
-      #     KMS_KEY: ${{ env.COSIGN_KEY }}
-
-      # Step 10: Run SBOM Orchestration Action
-      - name: Run SBOM Orchestration Action
-        uses: ./sbom-generation
+      Step 9: Run SLSA Provenance Action
+      - name: Run SLSA Provenance Action
+        uses: ./slsa-generation
         with:
-          TOOL: 'Syft'
-          FORMAT: 'spdx-json'
-          TARGET: 'lavakush07/easy-buggy-app:GHA'
+          TARGET: 'lavakush07/easy-buggy-app:GHAA'
           ATTEST: false
           KMS_KEY: ${{ env.COSIGN_KEY }}
+
+      # Step 10: Run SBOM Orchestration Action
+      # - name: Run SBOM Orchestration Action
+      #   uses: ./sbom-generation
+      #   with:
+      #     TOOL: 'Syft'
+      #     FORMAT: 'spdx-json'
+      #     TARGET: 'lavakush07/easy-buggy-app:GHA'
+      #     ATTEST: false
+      #     KMS_KEY: ${{ env.COSIGN_KEY }}
           
-      - name: Run SBOM Policy Enforcement Action
-        uses: ./sbom-policy-enforcement
-        with:
-          TARGET: 'lavakush07/easy-buggy-app:GHA'
-          VERIFY: true
-          KMS_KEY: ${{ env.COSIGN_KEY }}
-          POLICY_SET_REF: 'policy_for_at'
+      # - name: Run SBOM Policy Enforcement Action
+      #   uses: ./sbom-policy-enforcement
+      #   with:
+      #     TARGET: 'lavakush07/easy-buggy-app:GHA'
+      #     VERIFY: true
+      #     KMS_KEY: ${{ env.COSIGN_KEY }}
+      #     POLICY_SET_REF: 'policy_for_at'
     
       # -  name: SLSA Verification
       #    uses: ./slsa-verification
