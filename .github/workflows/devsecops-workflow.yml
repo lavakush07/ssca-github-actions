@@ -93,15 +93,15 @@ jobs:
           ATTEST: false
           KMS_KEY: ${{ env.COSIGN_KEY }}
 
-      # Step 10: Run SBOM Orchestration Action
-      # - name: Run SBOM Orchestration Action
-      #   uses: ./sbom-generation
-      #   with:
-      #     TOOL: 'Syft'
-      #     FORMAT: 'spdx-json'
-      #     TARGET: 'lavakush07/easy-buggy-app:GHA'
-      #     ATTEST: false
-      #     KMS_KEY: ${{ env.COSIGN_KEY }}
+      Step 10: Run SBOM Orchestration Action
+      - name: Run SBOM Orchestration Action
+        uses: ./sbom-generation
+        with:
+          TOOL: 'Syft'
+          FORMAT: 'spdx-json'
+          TARGET: 'lavakush07/easy-buggy-app:GHA'
+          ATTEST: false
+          KMS_KEY: ${{ env.COSIGN_KEY }}
           
       # - name: Run SBOM Policy Enforcement Action
       #   uses: ./sbom-policy-enforcement
